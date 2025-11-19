@@ -15,6 +15,17 @@ export const hashPassword = async (password: string): Promise<string> => {
   }
 };
 
+/**
+ * Hashes a plain text password using bcrypt.
+ *
+ * @param password - The plain text password to hash
+ * @returns A promise that resolves to the hashed password
+ * @throws Error if password is empty or hashing fails
+ *
+ * @example
+ * const hashed = await hashPassword('mySecurePassword123');
+ */
+
 export const comparePassword = async (
   password: string,
   hash: string
