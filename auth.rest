@@ -1,0 +1,31 @@
+GET http://localhost:3001/health
+
+###
+
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "username": "testuser",
+  "displayName": "Test User",
+  "password": "Testpassword123*",
+  "timezone": "UTC"
+}
+
+###
+
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "testpassword"
+}
+
+###
+
+GET http://localhost:3001/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWlhcDg3enYwMDAwNG1zZjI0eGludHF3IiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NjM4NDA3MjcsImV4cCI6MTc2NDQ0NTUyN30.LQ7gdJegBrWUNSzbK34OT1W-nfHO2PqhQN1bilqNljU
+
+###

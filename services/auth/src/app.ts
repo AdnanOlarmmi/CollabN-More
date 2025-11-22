@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 app.get("/health", (_, res) => {
   res.json({
-    status: "healthy",
+    status: "healthyyy",
     service: "auth",
     timestamp: new Date().toISOString(),
   });

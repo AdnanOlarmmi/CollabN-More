@@ -1,14 +1,11 @@
 import { Router } from "express";
+import { authenticate } from "../middleware/auth.middleware";
+import { register, login, me } from "../controllers/auth.controller";
 
 const router = Router();
 
-router.post("/user", (req, res) => {
-  const { name, email } = req.body;
-  res.json({
-    message: "User created kkkklj",
-    name,
-    email,
-  });
-});
+router.post("/register", register);
+router.post("/login", login);
+router.get("/me", authenticate, me);
 
 export default router;
