@@ -105,6 +105,16 @@ services:
     build: ./services/workspace
     container_name: slack-workspace-service
     restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: ./services/workspace/src
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./services/workspace/package.json
+          target: /app/package.json
     ports:
       - "3003:3003"
     environment:
