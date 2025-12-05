@@ -84,12 +84,50 @@ services:
     #   - ./services/auth:/app
     #   - /app/node_modules
     command: npm run dev
+  
+  postgres-workspace:
+    image: postgres:15-alpine
+    container_name: slack_postgres_workspace
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: slack_workspace
+      POSTGRES_USER: slack_user
+      POSTGRES_PASSWORD: slack_password
+    networks:
+      - slack_network
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_workspace_data:/var/lib/postgresql/data
+  
+
+  workspace-service:
+    build: ./services/workspace
+    container_name: slack-workspace-service
+    restart: unless-stopped
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
+      - PORT=3003
+      - DATABASE_URL=postgresql://slack_user:slack_password@postgres-workspace:5432/slack_workspace
+      - JWT_SECRET=your-secret-key
+      - REDIS_URL=redis://redis:6379
+      - AUTH_SERVICE_URL=http://auth-service:3001
+    depends_on:
+      - postgres-workspace
+      - redis
+      - auth-service
+    networks:
+      - slack_network
+    command: npm run dev
 
 networks:
   slack_network:
     driver: bridge
 volumes:
   postgres_data:
+  postgres_workspace_data:
   redis_data:
   mongodb_data:
   rabbitmq_data:
