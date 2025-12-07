@@ -10,7 +10,7 @@ app.use(express.json());
 app.get("/health", (_, res) => {
     res.json({
       status: "healthyyy",
-      service: "auth",
+      service: "workspace",
       timestamp: new Date().toISOString(),
     });
   });
