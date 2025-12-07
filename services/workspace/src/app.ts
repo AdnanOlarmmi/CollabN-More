@@ -13,7 +13,7 @@ app.get("/health", (_, res) => {
       service: "workspace",
       timestamp: new Date().toISOString(),
     });
-  });
+});
   
 app.use("/workspaces", workspaceRoutes);
 
